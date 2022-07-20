@@ -1,0 +1,162 @@
+local F = require 'custom.functions'
+
+local Term = {
+
+  -- toggle in terminal mode
+  ["<Space>i"] = {
+    function()
+      require("nvterm.terminal").toggle "float"
+    end,
+    "   toggle floating term",
+  },
+
+  ["<Space>h"] = {
+    function()
+      require("nvterm.terminal").toggle "horizontal"
+    end,
+    "   toggle horizontal term",
+  },
+
+  ["<Space>v"] = {
+    function()
+      require("nvterm.terminal").toggle "vertical"
+    end,
+    "   toggle vertical term",
+  },
+
+  -- ["<leader>d"] = { termcodes "<C-\\><C-N>", "   escape terminal mode" },
+
+}
+
+return {
+
+  disabled = {
+    n = {
+
+      -- switch between windows
+      ['<C-h>'] = '',
+      ['<C-l>'] = '',
+      ['<C-j>'] = '',
+      ['<C-k>'] = '',
+
+      -- Copy all
+      ['<C-c>'] = '',
+
+      -- line numbers
+      ['<leader>n'] = '',
+      ['<leader>rn'] = '',
+
+      -- termninal
+      ["<A-i>"] = '',
+      ["<leader>h"] = '',
+      ["<leader>v"] = '',
+
+      -- bufferline
+      ["<leader>x"] = '',
+
+
+      -- telescope
+      ["<leader>fb"] = '',
+      ["<leader>gt"] = '',
+      ["<leader>b"] = '',
+
+      -- lspconfig
+      ["<leader>ca"] = '',
+      ["<leader>ra"] = '',
+
+    },
+  },
+
+  general = {
+    n = {
+      -- switch between windows
+      ['<A-h>'] = { '<C-w>h', ' window left' },
+      ['<A-l>'] = { '<C-w>l', ' window right' },
+      ['<A-j>'] = { '<C-w>j', ' window down' },
+      ['<A-k>'] = { '<C-w>k', ' window up' },
+
+
+      ['<C-y>'] = { '<cmd> %y+ <CR>', '  copy whole file' },
+
+      ['<F11>'] = { F.toggleLineNumbering, '   toggle line number' },
+      ['<F4>'] = { F.toggleHlSearch, '   toggle highlight search' },
+      ['<F9>'] = { F.toggleIndents, '   toggle between indenting' },
+      ['<leader><F9>'] = { function() F.toggleIndents(true) end, '   toggle between indenting' },
+
+      ['<leader>g'] = { '<cmd> :e# <CR>', '  previous buffer' },
+
+      ['<C-+>'] = { function() F.adjustFontSize(1) end, '+  increase font size' },
+      ['<C-->'] = { function() F.adjustFontSize(-1) end, '+  decrease font size' },
+      ['<C-0>'] = { function() F.adjustFontSize(0, true) end, '+  reset font size' },
+    },
+
+  },
+
+  nvimtree = {
+    n = {
+      -- toggle
+      ['<leader>`'] = { '<cmd> NvimTreeToggle <CR>', '   toggle file browser' },
+      ['<leader><Tab>'] = { '<cmd> NvimTreeToggle <CR>', '   toggle file browser' },
+      ["<M-e>"] = { "<cmd> NvimTreeFocus <CR>", "   focus nvimtree" },
+      ["<F6>"] = { "<cmd> NvimTreeResize +20 <CR>", "   increase nvimtree witdth" },
+      ["<leader><F6>"] = { "<cmd> NvimTreeResize -20 <CR>", "   increase nvimtree witdth" },
+    }
+  },
+
+  nvterm = {
+    t = Term,
+    n = Term,
+  },
+
+  bufferline = {
+    n = {
+      ['<leader>d'] = { '<cmd> Kwbd <CR>', "   close buffer" },
+    }
+  },
+
+  telescope = {
+    n = {
+      ["<leader>e"] = { "<cmd> Telescope buffers <CR>", "  find buffers" },
+      ["<leader>cs"] = { "<cmd> Telescope git_status <CR>", "  git status" },
+    }
+  },
+
+  lspconfig = {
+    n = {
+      ["<leader>ac"] = {
+        function()
+          vim.lsp.buf.code_action()
+        end,
+        "   lsp code_action",
+      },
+
+      ["<leader>rn"] = {
+         function()
+            require("nvchad.ui.renamer").open()
+         end,
+         "   lsp rename",
+      },
+
+    },
+  },
+
+  shade = {
+    n = {
+      ["<leader>s"] = {
+        function()
+          require("shade").toggle()
+        end,
+
+        "   toggle shade",
+      },
+    },
+  },
+
+  truzen = {
+    n = {
+      ["<leader>ta"] = { "<cmd> TZAtaraxis <CR>", "   truzen ataraxis" },
+      ["<leader>tm"] = { "<cmd> TZMinimalist <CR>", "   truzen minimal" },
+      ["<leader>tf"] = { "<cmd> TZFocus <CR>", "   truzen focus" },
+    },
+  }
+}
