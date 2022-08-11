@@ -248,6 +248,7 @@ return {
     hide_root_folder = false,
     number = true,
     relativenumber = true,
+    adaptive_size = false,
     mappings = {
       custom_only = true,
       list = nvimtreeMappings,
@@ -268,5 +269,10 @@ return {
   },
   live_filter = {
     always_show_folders = false,
-  }
+  },
+  update_focused_file = {
+     -- disable annoying file focusing when related buffer is focuced
+     enable = false,
+     update_cwd = false,
+  },
 }

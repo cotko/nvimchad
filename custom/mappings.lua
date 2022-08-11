@@ -86,10 +86,24 @@ return {
       ['<leader>g'] = { '<cmd> :e# <CR>', '  previous buffer' },
 
       ['<C-+>'] = { function() F.adjustFontSize(1) end, '+  increase font size' },
+      ['<C-S-+>'] = { function() F.adjustFontSize(1) end, '+  increase font size' },
       ['<C-->'] = { function() F.adjustFontSize(-1) end, '+  decrease font size' },
       ['<C-0>'] = { function() F.adjustFontSize(0, true) end, '+  reset font size' },
+      ['<F3>'] = {
+         function()
+            vim.api.nvim_command ":echo expand('%:p')"
+         end,
+         "  show file location"
+      }
     },
-
+    i = {
+      ['<F3>'] = {
+         function()
+            vim.api.nvim_command ":echo expand('%:p')"
+         end,
+         "  show file location"
+      }
+    }
   },
 
   nvimtree = {
@@ -97,14 +111,11 @@ return {
       -- toggle
       ['<leader>`'] = { '<cmd> NvimTreeToggle <CR>', '   toggle file browser' },
       ['<leader><Tab>'] = { '<cmd> NvimTreeToggle <CR>', '   toggle file browser' },
-      ["<M-e>"] = { "<cmd> NvimTreeFocus <CR>", "   focus nvimtree" },
-      ["<F6>"] = { "<cmd> NvimTreeResize +20 <CR>", "   increase nvimtree witdth" },
-      ["<leader><F6>"] = { "<cmd> NvimTreeResize -20 <CR>", "   increase nvimtree witdth" },
+      ["<M-e>"] = { "<cmd> NvimTreeFocus <CR>", "   focus nvimtree" }
     }
   },
 
   nvterm = {
-    t = Term,
     n = Term,
   },
 
@@ -132,31 +143,11 @@ return {
 
       ["<leader>rn"] = {
          function()
-            require("nvchad.ui.renamer").open()
+            require("nvchad_ui.renamer").open()
          end,
          "   lsp rename",
       },
 
     },
   },
-
-  shade = {
-    n = {
-      ["<leader>s"] = {
-        function()
-          require("shade").toggle()
-        end,
-
-        "   toggle shade",
-      },
-    },
-  },
-
-  truzen = {
-    n = {
-      ["<leader>ta"] = { "<cmd> TZAtaraxis <CR>", "   truzen ataraxis" },
-      ["<leader>tm"] = { "<cmd> TZMinimalist <CR>", "   truzen minimal" },
-      ["<leader>tf"] = { "<cmd> TZFocus <CR>", "   truzen focus" },
-    },
-  }
 }

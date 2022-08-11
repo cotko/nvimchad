@@ -44,7 +44,7 @@ return {
     local match = string.gmatch(guiFont .. "", "[^:]+")
 
     local font = match()
-    local size = string.gmatch(match(), "%d+")()
+    local size = tonumber(string.gmatch(match(), "%d+")())
 
     if initialGuiFontSize == -1 then
       initialGuiFontSize = size
