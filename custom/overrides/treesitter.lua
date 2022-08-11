@@ -1,10 +1,11 @@
 return {
-   ensure_installed = {
-      "lua",
-      "html",
-      "css",
-      "hcl",
-      "jsonc",
-      "python",
-   },
+  ensure_installed = {
+    "bash",
+    "lua",
+    "html",
+    "css",
+    "hcl",
+    "jsonc",
+    "python",
+  },
 }

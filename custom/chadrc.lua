@@ -1,4 +1,4 @@
-local overrides = require "custom.overrides"
+local override = require "custom.overrides"
 
 return {
 
@@ -9,16 +9,7 @@ return {
 
   plugins = {
     user = require "custom.plugins",
-    options = {
-      lspconfig = {
-        setup_lspconf = "custom.plugins.lspconfig",
-      }
-    },
-    override = {
-     ["kyazdani42/nvim-tree.lua"] = overrides.nvimtree,
-     ["nvim-treesitter/nvim-treesitter"] = overrides.treesitter,
-     ["williamboman/mason"] = overrides.mason,
-    },
+    override = override,
     remove = {
       -- "kyazdani42/nvim-tree.lua",
     },

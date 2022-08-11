@@ -1,30 +1,18 @@
 local lspsettings = require "custom.plugins.lsp"
+local on_attach = require("plugins.configs.lspconfig").on_attach
+local capabilities = require("plugins.configs.lspconfig").capabilities
+local lspconfig = require "lspconfig"
+local lspmasonmappings = require"custom.plugins.lsp_mason_map"
+local masonconfig = require"custom.overrides.mason"
 
-return {
+for _, server in ipairs(masonconfig.ensure_installed) do
+  local lsp = lspmasonmappings.mason_lsp_map[server]
 
-  setup_lsp = function(attach, capabilities)
-    local lspconfig = require "lspconfig"
-
-    -- lspservers with default config
-    local servers = {
-       "html",
-       "tsserver",
-       "bashls",
-       "cssls",
-       "eslint",
-       "jsonls",
-       "java_language_server",
-       "pyright",
-       "pylsp",
-       "rust_analyzer",
+  if lsp ~= nil then
+    lspconfig[lsp].setup {
+      on_attach = on_attach,
+      capabilities = capabilities,
+      settings = lspsettings[lsp],
     }
-
-    for _, lsp in ipairs(servers) do
-      lspconfig[lsp].setup {
-        on_attach = attach,
-        capabilities = capabilities,
-        settings = lspsettings[lsp],
-      }
-    end
   end
-}
+end

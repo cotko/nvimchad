@@ -1,5 +1,5 @@
 return {
-  nvimtree = require"custom.overrides.nvimtree",
-  treesitter = require"custom.overrides.treesitter",
-  mason = require"custom.overrides.mason",
+  ["kyazdani42/nvim-tree.lua"] = require"custom.overrides.nvimtree",
+  ["nvim-treesitter/nvim-treesitter"] = require"custom.overrides.treesitter",
+  ["williamboman/mason.nvim"] = require"custom.overrides.mason",
 }
