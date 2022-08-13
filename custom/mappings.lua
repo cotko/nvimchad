@@ -32,6 +32,8 @@ return {
 
   disabled = {
     n = {
+      -- general
+      ["<leader>x"] = '',
 
       -- switch between windows
       ['<C-h>'] = '',
@@ -50,10 +52,6 @@ return {
       ["<A-i>"] = '',
       ["<leader>h"] = '',
       ["<leader>v"] = '',
-
-      -- bufferline
-      ["<leader>x"] = '',
-
 
       -- telescope
       ["<leader>fb"] = '',
@@ -83,7 +81,7 @@ return {
       ['<F9>'] = { F.toggleIndents, '   toggle between indenting' },
       ['<leader><F9>'] = { function() F.toggleIndents(true) end, '   toggle between indenting' },
 
-      ['<leader>g'] = { '<cmd> :e# <CR>', '  previous buffer' },
+      ['<leader>g'] = { '<cmd> :e# <CR>', 'goto prev buffer' },
 
       ['<C-+>'] = { function() F.adjustFontSize(1) end, '+  increase font size' },
       ['<C-S-+>'] = { function() F.adjustFontSize(1) end, '+  increase font size' },
@@ -94,7 +92,11 @@ return {
             vim.api.nvim_command ":echo expand('%:p')"
          end,
          "  show file location"
-      }
+      },
+      ['<leader>d'] = {
+        '<cmd> Kwbd <CR>',
+        "  close buffer",
+      },
     },
     i = {
       ['<F3>'] = {
@@ -117,12 +119,6 @@ return {
 
   nvterm = {
     n = Term,
-  },
-
-  bufferline = {
-    n = {
-      ['<leader>d'] = { '<cmd> Kwbd <CR>', "   close buffer" },
-    }
   },
 
   telescope = {

@@ -1,12 +1,20 @@
-vim.opt.relativenumber = true
-vim.opt.number = true
-vim.opt.list = true
-vim.opt.listchars = "tab:▸ ,eol:¬,trail:~"
+local g = vim.g
+local opt = vim.opt
 
-vim.g.sts = 2
-vim.g.sw = 2
-vim.g.ts = 2
-vim.g.expandtab = true
+g.mapleader = ','
+g.maplocalleader = ','
 
+opt.relativenumber = true
+opt.number = true
+opt.list = true
+opt.listchars = "tab:▸ ,eol:¬,trail:~"
 
-vim.g.mapleader = ','
+g.sts = 2
+g.sw = 2
+g.ts = 2
+g.expandtab = true
+
+opt.sts = 2
+opt.sw = 2
+opt.ts = 2
+opt.expandtab = true

@@ -40,7 +40,17 @@ return {
   end,
 
   adjustFontSize = function(step, reset)
-    local guiFont = vim.api.nvim_get_var('GuiFont')
+
+    local ran, guiFont = pcall(vim.api.nvim_get_var, 'GuiFont')
+
+    if ran==false then
+      ran, guiFont = pcall(vim.api.cmd, 'guifont')
+      print('res2' .. tostring(ran))
+      if ran == false then
+        return
+      end
+    end
+
     local match = string.gmatch(guiFont .. "", "[^:]+")
 
     local font = match()

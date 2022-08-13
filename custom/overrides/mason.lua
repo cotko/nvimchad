@@ -1,13 +1,12 @@
 return {
   ensure_installed = {
     "jdtls", -- java
-    "deno",
 
     "lua-language-server",
     "stylua",
 
     "typescript-language-server",
-    "deno",
+    -- "deno",
 
     "eslint-lsp",
     "css-lsp",
