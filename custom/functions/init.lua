@@ -1,6 +1,33 @@
 local SF = require "custom.functions.shared"
 
 local initialGuiFontSize = -1
+local defaultGuiFontSize = 14
+local defaultGuiFontName = 'Monospace'
+
+function ParseGuiFontOrGetDefault(str)
+  local font = defaultGuiFontName
+  local size = defaultGuiFontSize
+
+  if str ~= nil and string.find(str, ":") ~= nil then
+
+    local eqIndex = string.find(str, '=')
+
+    if eqIndex ~= nil then
+      str = string.sub(str, eqIndex + 1)
+    end
+
+    local match = string.gmatch(str .. "", "[^:]+")
+
+    font = match()
+    size = tonumber(string.gmatch(match(), "%d+")())
+
+  end
+
+  return {
+    font = font,
+    size = size,
+  }
+end
 
 return {
 
@@ -40,21 +67,25 @@ return {
   end,
 
   adjustFontSize = function(step, reset)
-
+    local variant = 1
     local ran, guiFont = pcall(vim.api.nvim_get_var, 'GuiFont')
 
     if ran==false then
-      ran, guiFont = pcall(vim.api.cmd, 'guifont')
-      print('res2' .. tostring(ran))
+      ran, guiFont = pcall(vim.api.nvim_command, 'set guifont')
+
       if ran == false then
         return
       end
+
+      guiFont = vim.o.guifont
+      variant = 2
+
     end
 
-    local match = string.gmatch(guiFont .. "", "[^:]+")
+    local parsedFont = ParseGuiFontOrGetDefault(guiFont)
 
-    local font = match()
-    local size = tonumber(string.gmatch(match(), "%d+")())
+    local font = parsedFont.font
+    local size = parsedFont.size
 
     if initialGuiFontSize == -1 then
       initialGuiFontSize = size
@@ -78,9 +109,11 @@ return {
 
     local newGuiFont = font .. ":h" .. newSize
 
-    -- print('Setting new font size: ' .. newGuiFont)
-
-    --vim.api.nvim_set_var('GuiFont', newGuiFont)
-    vim.cmd('GuiFont! ' .. newGuiFont)
+    if variant == 1 then
+      vim.cmd('GuiFont! ' .. newGuiFont)
+    else
+      vim.o.guifont = newGuiFont
+      -- vim.cmd('set guifont=' .. newGuiFont)
+    end
   end,
 }
