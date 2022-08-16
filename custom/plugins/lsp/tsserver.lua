@@ -1,0 +1,5 @@
+return {
+     preferences = {
+       includeCompletionsForImportStatements = true,
+     },
+}

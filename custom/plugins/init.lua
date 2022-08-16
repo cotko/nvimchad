@@ -1,4 +1,3 @@
-
 return {
   ["rcarriga/nvim-notify"] = {},
   ['rgarver/Kwbd.vim'] = {},
@@ -12,5 +11,14 @@ return {
       require "plugins.configs.lspconfig"
       require "custom.plugins.lspconfig"
     end,
+  },
+  ['folke/trouble.nvim'] = {
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require "custom.plugins.trouble"
+    end
+  },
+  ["folke/which-key.nvim"] = {
+    disable = false
   },
 }

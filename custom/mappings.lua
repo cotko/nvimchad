@@ -125,6 +125,19 @@ return {
     n = {
       ["<leader>e"] = { "<cmd> Telescope buffers <CR>", "  find buffers" },
       ["<leader>cs"] = { "<cmd> Telescope git_status <CR>", "  git status" },
+    },
+  },
+
+  trouble = {
+    n = {
+      ["<leader>aw"] = {
+        "<cmd>Trouble document_diagnostics<cr>",
+        " document diagnostics",
+      },
+      ["<leader>ad"] = {
+        "<cmd>Trouble workspace_diagnostics<cr>",
+        " workspace diagnostics ",
+      },
     }
   },
 
