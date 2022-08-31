@@ -21,4 +21,27 @@ return {
   ["folke/which-key.nvim"] = {
     disable = false
   },
+  ['jose-elias-alvarez/typescript.nvim'] = {
+    requires = "neovim/nvim-lspconfig"
+  },
+  ["Shatur/neovim-session-manager"] = {
+    config = function()
+      require"custom.plugins.session_manager"
+    end,
+  },
+  ["goolord/alpha-nvim"] = {
+    after = {"neovim-session-manager", "base46"},
+    disable = false,
+    config = function()
+      require "custom.plugins.alpha"
+    end,
+  },
+  ["jose-elias-alvarez/null-ls.nvim"] = {
+    after = "nvim-lspconfig",
+    config = function()
+      require "custom.plugins.null_ls"
+    end,
+  },
+  ["nvim-telescope/telescope-ui-select.nvim"] = {
+  },
 }

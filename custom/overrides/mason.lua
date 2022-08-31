@@ -16,6 +16,7 @@ return {
     "pyright",
     "pylint",
     "python-lsp-server",
+    "autopep8",
 
     "bash-language-server",
 

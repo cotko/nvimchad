@@ -9,7 +9,9 @@ return {
         vim.notify("[NvimTree] " .. msg, vim.log.levels.WARN)
       end
     end)
-  end
+  end,
 
-
+  isNeovide = function()
+    return vim.g.neovide
+  end,
 }

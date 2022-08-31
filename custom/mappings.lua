@@ -87,24 +87,45 @@ return {
       ['<C-S-+>'] = { function() F.adjustFontSize(1) end, '+  increase font size' },
       ['<C-->'] = { function() F.adjustFontSize(-1) end, '+  decrease font size' },
       ['<C-0>'] = { function() F.adjustFontSize(0, true) end, '+  reset font size' },
-      ['<F3>'] = {
-         function()
-            vim.api.nvim_command ":echo expand('%:p')"
-         end,
-         "  show file location"
+
+      ['<F3>'] = { ":echo expand('%:p')<CR>", "  show file location" },
+      ['<leader>d'] = { '<cmd> Kwbd <CR>', "  close buffer" },
+
+      -- FORMATTING
+      ["<leader>fj"] = {
+        function ()
+          vim.api.nvim_command "%!jq . -"
+        end,
+        "format whole buffer to JSON"
       },
-      ['<leader>d'] = {
-        '<cmd> Kwbd <CR>',
-        "  close buffer",
+      ["<leader>flj"] = {
+        function ()
+          vim.api.nvim_command ".!jq . -"
+        end,
+        "format whole current line to JSON" 
       },
+
+      -- nvim 0.8.x
+      ["<leader>fm"] = {
+        function()
+          vim.lsp.buf.format { async = true }
+        end,
+        "lsp formatting",
+      },
+
+
     },
     i = {
-      ['<F3>'] = {
-         function()
-            vim.api.nvim_command ":echo expand('%:p')"
-         end,
-         "  show file location"
-      }
+      ['<F3>'] = { ":echo expand('%:p')<CR>", "  show file location" },
+    },
+
+    v = {
+      ["<leader>fj"] = {
+        function ()
+          vim.api.nvim_command "'<,'>!jq"
+        end,
+        "format selection to JSON"
+      },
     }
   },
 

@@ -2,7 +2,7 @@ local SF = require "custom.functions.shared"
 
 local initialGuiFontSize = -1
 local defaultGuiFontSize = 14
-local defaultGuiFontName = 'Monospace'
+local defaultGuiFontName = 'RobotoMono Nerd Font'
 
 function ParseGuiFontOrGetDefault(str)
   local font = defaultGuiFontName
