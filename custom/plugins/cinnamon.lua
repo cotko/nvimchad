@@ -1,14 +1,9 @@
 local fn = require"custom.functions.shared"
+if fn.isNeovide() then return end
 
-local function setup()
-  local present, plug = pcall(require, "cinnamon")
-  if not present then
-    return
-  end
-
-  plug.setup {}
+local present, plug = pcall(require, "cinnamon")
+if not present then
+  return
 end
 
-if not fn.isNeovide() then
-  setup()
-end
+plug.setup {}

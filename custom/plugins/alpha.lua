@@ -183,9 +183,13 @@ local function getSessionCols()
         sub = sub:sub(1, lastSepIdx - 1)
 
         lastSepIdx = sub:match("^.*()/")
-        sub = sub:sub(lastSepIdx + 1)
+        if lastSepIdx ~= nil then
+          sub = sub:sub(lastSepIdx + 1)
+          prefix = "{" .. sub .. '}..'
+        else
+          prefix = ""
+        end
 
-        prefix = "{" .. sub .. '}..'
 
 
 				break
