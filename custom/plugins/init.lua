@@ -31,7 +31,7 @@ return {
   },
   ["goolord/alpha-nvim"] = {
     after = {"neovim-session-manager", "base46"},
-    disable = false,
+    disable = true,
     config = function()
       require "custom.plugins.alpha"
     end,
@@ -42,6 +42,7 @@ return {
       require "custom.plugins.null_ls"
     end,
   },
-  ["nvim-telescope/telescope-ui-select.nvim"] = {
-  },
+  ["nvim-telescope/telescope-ui-select.nvim"] = {},
+  ["nvim-treesitter/playground"] = {},
+  ["nvim-treesitter/nvim-treesitter-textobjects"] = {},
 }

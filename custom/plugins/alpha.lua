@@ -7,7 +7,8 @@ require("base46").load_highlight("alpha")
 math.randomseed(os.time())
 
 local COMMON_CODE_DIRS = {
-	["/mnt/klet/koda"] = "koda",
+	["/mnt/klet/koda/cotko"] = "cotko",
+	["/mnt/klet/koda/gid"] = "globalID"
 }
 
 local function pick_color()
@@ -180,9 +181,14 @@ local function getSessionCols()
 
         local sub = sname:sub(string.len(cd) + 1)
         local lastSepIdx = sub:match("^.*()/")
-        sub = sub:sub(1, lastSepIdx - 1)
+        if lastSepIdx == nil then
+          prefix = sub
+          break
+        end
 
+        sub = sub:sub(1, lastSepIdx - 1)
         lastSepIdx = sub:match("^.*()/")
+
         if lastSepIdx ~= nil then
           sub = sub:sub(lastSepIdx + 1)
           prefix = "{" .. sub .. '}..'
@@ -255,6 +261,7 @@ alpha.setup({
 		{
 			type = "group",
 			val = {
+				button("e", "  New Buffer  ", ":enew<CR>"),
 				button("f f", "  Find File  ", ":Telescope find_files<CR>"),
 				button("f o", "  Recent File  ", ":Telescope oldfiles<CR>"),
 				button("b", "  Bookmarks  ", ":Telescope marks<CR>"),

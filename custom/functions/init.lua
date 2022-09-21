@@ -1,36 +1,6 @@
 local SF = require "custom.functions.shared"
 
-local initialGuiFontSize = -1
-local defaultGuiFontSize = 14
-local defaultGuiFontName = 'RobotoMono Nerd Font'
-
-function ParseGuiFontOrGetDefault(str)
-  local font = defaultGuiFontName
-  local size = defaultGuiFontSize
-
-  if str ~= nil and string.find(str, ":") ~= nil then
-
-    local eqIndex = string.find(str, '=')
-
-    if eqIndex ~= nil then
-      str = string.sub(str, eqIndex + 1)
-    end
-
-    local match = string.gmatch(str .. "", "[^:]+")
-
-    font = match()
-    size = tonumber(string.gmatch(match(), "%d+")())
-
-  end
-
-  return {
-    font = font,
-    size = size,
-  }
-end
-
 return {
-
   toggleLineNumbering = function()
     local nl = vim.o.relativenumber and vim.o.number
     vim.o.number = not nl
@@ -67,33 +37,18 @@ return {
   end,
 
   adjustFontSize = function(step, reset)
-    local variant = 1
-    local ran, guiFont = pcall(vim.api.nvim_get_var, 'GuiFont')
+   local parsedFont = SF.getGuiFont()
 
-    if ran==false then
-      ran, guiFont = pcall(vim.api.nvim_command, 'set guifont')
-
-      if ran == false then
-        return
-      end
-
-      guiFont = vim.o.guifont
-      variant = 2
-
+    if parsedFont == nil then
+      return
     end
-
-    local parsedFont = ParseGuiFontOrGetDefault(guiFont)
 
     local font = parsedFont.font
     local size = parsedFont.size
 
-    if initialGuiFontSize == -1 then
-      initialGuiFontSize = size
-    end
-
     local newSize
     if reset then
-      newSize = initialGuiFontSize
+      newSize = parsedFont.initialGuiFontSize
     else
       newSize = size + step
     end
@@ -107,13 +62,6 @@ return {
       return
     end
 
-    local newGuiFont = font .. ":h" .. newSize
-
-    if variant == 1 then
-      vim.cmd('GuiFont! ' .. newGuiFont)
-    else
-      vim.o.guifont = newGuiFont
-      -- vim.cmd('set guifont=' .. newGuiFont)
-    end
+    SF.setGuiFont(font, newSize)
   end,
 }

@@ -62,7 +62,11 @@ return {
       ["<leader>ca"] = '',
       ["<leader>ra"] = '',
 
+      ["<leader>pt"] = '',
     },
+    v = {
+      ["<leader>fb"] = '',
+    }
   },
 
   general = {
@@ -104,6 +108,18 @@ return {
         end,
         "format whole current line to JSON" 
       },
+      ["<leader>fb"] = {
+        function ()
+          vim.api.nvim_command "%!b64dec . -"
+        end,
+        "decode whole buffer from from B64 + optionally json format it"
+      },
+      ["<leader>flb"] = {
+        function ()
+          vim.api.nvim_command ".!b64dec . -"
+        end,
+        "decode whole current line from B64 + optionally json format it"
+      },
 
       -- nvim 0.8.x
       ["<leader>fm"] = {
@@ -112,6 +128,8 @@ return {
         end,
         "lsp formatting",
       },
+
+      ["<leader>p"] = { "\"_dP", "Paste deleted" },
 
 
     },
@@ -125,6 +143,12 @@ return {
           vim.api.nvim_command "'<,'>!jq"
         end,
         "format selection to JSON"
+      },
+      ["<leader>fb"] = {
+        function ()
+          vim.api.nvim_command "'<,'>!b64dec"
+        end,
+        "decode selection from B64 + optionally json format it"
       },
     }
   },
