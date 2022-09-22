@@ -1,4 +1,4 @@
-local fileFunctions = require "custom.functions.files"
+local file_functions = require "custom.functions.files"
 
 local size = 40
 local resizeStep = 10
@@ -132,7 +132,7 @@ local nvimtreeMappings = {
   {
     key = "mc",
     action = "better_copy",
-    action_cb = fileFunctions.better_copy,
+    action_cb = file_functions.better_copy,
     desc = "copy file",
   },
   {
@@ -243,36 +243,38 @@ local nvimtreeMappings = {
 }
 
 return {
-  view = {
-    width = size,
-    hide_root_folder = false,
-    number = true,
-    relativenumber = true,
-    adaptive_size = false,
-    mappings = {
-      custom_only = true,
-      list = nvimtreeMappings,
-    },
-  },
-  git = {
-    enable = true,
-    ignore = false,
-  },
-
-  renderer = {
-    highlight_git = true,
-    icons = {
-      show = {
-        git = true,
+  override_options = {
+    view = {
+      width = size,
+      hide_root_folder = false,
+      number = true,
+      relativenumber = true,
+      adaptive_size = false,
+      mappings = {
+        custom_only = true,
+        list = nvimtreeMappings,
       },
     },
-  },
-  live_filter = {
-    always_show_folders = false,
-  },
-  update_focused_file = {
-     -- disable annoying file focusing when related buffer is focuced
-     enable = false,
-     update_cwd = false,
-  },
+    git = {
+      enable = true,
+      ignore = false,
+    },
+
+    renderer = {
+      highlight_git = true,
+      icons = {
+        show = {
+          git = true,
+        },
+      },
+    },
+    live_filter = {
+      always_show_folders = false,
+    },
+    update_focused_file = {
+       -- disable annoying file focusing when related buffer is focuced
+       enable = false,
+       update_cwd = false,
+    },
+  }
 }

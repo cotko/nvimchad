@@ -1,4 +1,4 @@
-local fn = require"custom.functions.shared"
+local fn = require "custom.functions.util"
 if fn.isNeovide() then return end
 
 local present, plug = pcall(require, "cinnamon")

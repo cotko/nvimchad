@@ -1,37 +1,28 @@
-local present, null_ls = pcall(require, "null-ls")
+local present, mod = pcall(require, "null-ls")
+if not present then return end
 
-if not present then
-  return
-end
+local b = mod.builtins
 
-local b = null_ls.builtins
-
-null_ls.setup {
+mod.setup {
   debug = false,
   sources = {
-
-    -- b.formatting.deno_fmt,
-
     b.code_actions.gitsigns,
 
-    b.formatting.prettier.with {
-      filetypes = {
-        "html", "markdown", "css", "js", "ts", "mjs", "mts"
-      }
-    },
+    b.code_actions.eslint_d,
+    b.diagnostics.eslint_d,
+    b.formatting.eslint_d,
+    b.formatting.prettier,
+		b.diagnostics.tsc,
 
-    b.formatting.eslint,
+    b.formatting.jq,
+
+
     b.formatting.autopep8,
-    -- b.formatting.spell,
+    b.diagnostics.flake8,
+ 		b.diagnostics.pylint,
 
-    -- Lua
+    b.completion.luasnip,
     b.formatting.stylua,
-
-    -- Shell
-    b.formatting.shfmt,
-    b.diagnostics.shellcheck.with { diagnostics_format = "#{m} [#{c}]" },
-
-    -- cpp
-    -- b.formatting.clang_format,
+    -- b.formatting.lua_format,
   }
 }

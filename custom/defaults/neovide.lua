@@ -1,4 +1,4 @@
-local fn = require"custom.functions.shared"
+local fn = require"custom.functions.util"
 if not fn.isNeovide() then return end
 
 vim.g.neovide_scroll_animation_length=0.5
